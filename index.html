@@ -23,7 +23,6 @@
       --line-alpha-mult: 1;
     }
 
-    /* Dark mode variables override (on documentElement.dark-mode) */
     :root.dark-mode {
       --primary: #60a5fa;
       --muted: #94a3b8;
@@ -59,7 +58,17 @@
       background: var(--bg-top) !important;
     }
 
-    #bgCanvas { position:fixed; inset:0; width:100%; height:100%; z-index:-20; pointer-events:none; filter: blur(0.6px) saturate(.95) contrast(.95); opacity:1; transition: filter .35s ease, opacity .35s ease; }
+    #bgCanvas {
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:-20;
+      pointer-events:none;
+      filter: blur(0.6px) saturate(.95) contrast(.95);
+      opacity: 1;
+      transition: filter .35s ease, opacity .35s ease;
+    }
 
     body::before{
       content:'';
@@ -302,7 +311,6 @@
               <div class="text-sm text-slate-600 flex flex-col justify-center">
                 <div class="mb-2">• Characterized with SEM, fluorescence imaging; combined with COMSOL to validate mechanisms.</div>
                 <div class="mb-2">• Programmed bending and complex shape morphing via surface-energy directed monomer migration.</div>
-                <div class="mb-2">• Automated image processing for droplet profiling</div>
                 <div class="mb-2">• Video demonstration included (Hydrogel Demo Vid)</div>
                 <div class="text-xs text-slate-400 mt-2">Click to expand for full description and video.</div>
               </div>
@@ -485,7 +493,7 @@
     <div class="mt-8 text-center text-sm text-slate-500 reveal">2025-2026</div>
   </footer>
 
-  <!-- canvas script (unchanged from earlier version) -->
+  <!-- canvas script (unchanged) -->
   <script>
   (function(){
     const canvas = document.getElementById('bgCanvas');
@@ -735,7 +743,7 @@
   })();
   </script>
 
-  <!-- Main scripts -->
+  <!-- Main scripts (modified research paragraphs and data) -->
   <script>
     (function(){
       var els = document.querySelectorAll('.reveal');
@@ -777,7 +785,7 @@
         "subtitle": "SMART - Lab, University of Waterloo",
         "date": "01/2024 – 04/2024 • Waterloo, ON",
         "items": [
-          "Co-authored on a published research paper",
+          "Co-authored published research papers",
           "Participated in projects creating hydrogels for soft body robotics",
           "Synthesized and characterized hydrogels with nanocomposites (Crystal Nanocellulose, Iron Oxide nanoparticles)",
           "Designed and printed 3D CAD models for extrusion & DLP 3D printing",
@@ -825,7 +833,6 @@
         "items": [
           "Characterized with SEM, fluorescence imaging; combined with COMSOL to validate mechanisms.",
           "Programmed bending and complex shape morphing via surface-energy directed monomer migration.",
-          "Automated image processing for droplet profiling",
           "Video demonstration included (Hydrogel Demo Vid)"
         ],
         "long_description": "This project developed a method to program shape-change in zwitterionic hydrogels by directing monomer migration using surface energy contrasts (DMAPS/MAA). The technique yields reproducible, pH-responsive gradients that produce rapid and programmable bending and 2D→3D transformations. The approach includes imaging, compositional analysis, and COMSOL modeling to support the mechanism and potential soft-robotics applications."
@@ -1022,11 +1029,9 @@
 
             openOverlay('Hydrogel — image', wrap, { expandWidth: false });
 
-            // hide nav arrows and headerDownload for image-only view
             prevBtn.style.display = 'none';
             nextBtn.style.display = 'none';
             headerDownload.style.display = 'none';
-            // set zoomSub to citation short
             zoomSub.textContent = 'N. Bouzari et al. — 2026';
             return;
           }
@@ -1123,11 +1128,13 @@
         right.style.flexDirection = 'column';
         right.style.justifyContent = 'center';
 
-        var inner = '<p style="margin-bottom:12px;">' + info.long_description + '</p>';
-        inner += '<ul style="margin-top:0; padding-left: 18px;">';
-        info.items.forEach(function(item){ inner += '<li style="margin-bottom:10px;">' + item + '</li>'; });
-        inner += '</ul>';
-        right.innerHTML = inner;
+        // NEW: paragraphs (increased font-size and nicer spacing), removed the "Automated image processing..." line
+        var paraHtml = '<p style="margin-bottom:14px; font-size:16px; line-height:1.6;">' + info.long_description + '</p>';
+        paraHtml += '<p style="margin-bottom:12px; font-size:15.5px; line-height:1.6;">Characterization combined SEM and fluorescence imaging with COMSOL simulations to validate the proposed mechanisms that drive monomer migration and shape transformation.</p>';
+        paraHtml += '<p style="margin-bottom:12px; font-size:15.5px; line-height:1.6;">The experimental protocol programs bending and complex shape morphing by establishing surface-energy directed monomer gradients (DMAPS/MAA), enabling reliable 2D→3D transformations useful for soft-robotics and responsive devices.</p>';
+        paraHtml += '<p style="margin-bottom:12px; font-size:15.5px; line-height:1.6;">A short video demonstration illustrates the imaging rig, the staged experiments, and representative results (Hydrogel Demo Vid).</p>';
+
+        right.innerHTML = paraHtml;
         wrapper.appendChild(right);
 
         headerDownload.href = './Shape-change programming of zwitterionic hydrogels via chemical gradients directed by surface energy.pdf';
