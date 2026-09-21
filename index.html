@@ -327,6 +327,50 @@
       </div>
 
       <div class="grid md:grid-cols-2 gap-6">
+        
+        <article class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm reveal experience-card" data-full-id="irradiant" tabindex="0" role="button" aria-label="Open Irradiant details">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="font-semibold">Research Assistant</div>
+              <div class="text-sm text-slate-600">Irradiant Technologies Inc.</div>
+            </div>
+            <div class="text-sm text-slate-500">05/2026 – 09/2026 • Waltham, MA</div>
+          </div>
+
+          <div class="mt-4 grid grid-cols-2 gap-3 items-start">
+            <div class="logo-square">
+              <img alt="Irradiant Technologies Inc." src="./Irradiant%20logo.jpeg" loading="lazy">
+            </div>
+
+            <div class="text-sm text-slate-600 space-y-2">
+              <div>• Assisted in synthesis and characterization of samples at Harvard and MIT.</div>
+              <div>• Took lead and implemented automation robot for overnight lab operations to reduce turn around time of contract deliverables.</div>
+              <div>• Researched varying novel methods of 3D printing structures using Two Photon Lithography (TPL).</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm reveal experience-card" data-full-id="york" tabindex="0" role="button" aria-label="Open York details">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="font-semibold">Research Assistant</div>
+              <div class="text-sm text-slate-600">York University</div>
+            </div>
+            <div class="text-sm text-slate-500">01/2026 – 04/2026 • Toronto, ON</div>
+          </div>
+
+          <div class="mt-4 grid grid-cols-2 gap-3 items-start">
+            <div class="logo-square">
+              <img alt="York University" src="./yorku%20logo.jpeg" loading="lazy">
+            </div>
+
+            <div class="text-sm text-slate-600 space-y-2">
+              <div>• Assisted in conducting Carbon Capture Utilization Storage (CCUS) experiments using customized Electrochemically Mediated Amine Regeneration (EMAR) system.</div>
+              <div>• Assembled the apparatus and tested Nanoparticle Tracking Analysis (NTA) using Dynamic Light Scattering (DLS).</div>
+            </div>
+          </div>
+        </article>
+
         <article class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm reveal experience-card" data-full-id="h2nano" tabindex="0" role="button" aria-label="Open H2nano details">
           <div class="flex items-start justify-between">
             <div>
@@ -768,6 +812,29 @@
     var galleryIndex = 0;
 
     var detailsMap = {
+      "irradiant": {
+        "title": "Research Assistant",
+        "subtitle": "Irradiant Technologies Inc.",
+        "date": "05/2026 – 09/2026 • Waltham, MA",
+        "items": [
+          "Took lead and implemented automation robot for overnight lab operations to reduce turn around time of contract deliverables.",
+          "Assisted in synthesis and characterization of samples at Harvard and MIT.",
+          "Researched varying novel methods of 3D printing structures using Two Photon Lithography (TPL).",
+          "Utilized the X-Tool for creating patterns and samples with laser ablation.",
+          "Modified and printed CAD models to be used for automated pipetting."
+        ]
+      },
+      "york": {
+        "title": "Research Assistant",
+        "subtitle": "York University",
+        "date": "01/2026 – 04/2026 • Toronto, ON",
+        "items": [
+          "Assisted in conducting Carbon Capture Utilization Storage (CCUS) experiments using customized Electrochemically Mediated Amine Regeneration (EMAR) system.",
+          "Assembled the apparatus and tested Nanoparticle Tracking Analysis (NTA) using Dynamic Light Scattering (DLS).",
+          "Conducted literature research for EMAR and NTA.",
+          "Supported keeping stock of lab supplies for daily operation."
+        ]
+      },
       "h2nano": {
         "title": "Material Science Specialist",
         "subtitle": "H2nano",
@@ -1128,7 +1195,6 @@
         right.style.flexDirection = 'column';
         right.style.justifyContent = 'center';
 
-        // NEW: paragraphs (increased font-size and nicer spacing), removed the "Automated image processing..." line
         var paraHtml = '<p style="margin-bottom:14px; font-size:16px; line-height:1.6;">' + info.long_description + '</p>';
         paraHtml += '<p style="margin-bottom:12px; font-size:15.5px; line-height:1.6;">Characterization combined SEM and fluorescence imaging with COMSOL simulations to validate the proposed mechanisms that drive monomer migration and shape transformation.</p>';
         paraHtml += '<p style="margin-bottom:12px; font-size:15.5px; line-height:1.6;">The experimental protocol programs bending and complex shape morphing by establishing surface-energy directed monomer gradients (DMAPS/MAA), enabling reliable 2D→3D transformations useful for soft-robotics and responsive devices.</p>';
@@ -1167,11 +1233,12 @@
 
       var right = document.createElement('div');
       right.className = 'detail-text detail-scroll';
-      var inner = '<h3>' + info.title + '</h3>';
-      if (info.subtitle) inner += '<div class="text-sm text-slate-600" style="margin-bottom:6px;">' + info.subtitle + '</div>';
-      inner += '<div class="meta">' + info.date + '</div><ul style="margin-top:8px;">';
-      info.items.forEach(function(item){ inner += '<li>' + item + '</li>'; });
+      
+      // Removed subheadings (title, subtitle, meta date) as requested to prevent repetition in the overlay 
+      var inner = '<ul style="margin-top:0; padding-left:18px;">';
+      info.items.forEach(function(item){ inner += '<li style="margin-bottom:10px;">' + item + '</li>'; });
       inner += '</ul>';
+      
       right.innerHTML = inner;
       wrapper.appendChild(right);
 
