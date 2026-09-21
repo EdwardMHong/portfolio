@@ -144,6 +144,13 @@
       font-size: 15px !important;
       line-height: 1.45;
     }
+
+    /* Added target specifically for Experience block list items to increase size */
+    .detail-text ul li.exp-list-item {
+      font-size: 20px !important;
+      line-height: 1.55;
+    }
+
     .zoom-panel > div { padding: 12px !important; }
     #zoomContent { padding: 12px !important; min-height: 48vh !important; }
     .detail-text { max-width: 720px; }
@@ -154,6 +161,7 @@
       .detail-text, .text-sm { font-size:14.5px !important; }
       .zoom-panel { width: 96% !important; }
       #zoomContent { min-height: 42vh !important; }
+      .detail-text ul li.exp-list-item { font-size: 18px !important; }
     }
 
     :root.dark-mode .bg-white { background: var(--card) !important; color: var(--text) !important; border-color: rgba(255,255,255,0.04) !important; box-shadow: 0 12px 34px rgba(0,0,0,0.45) !important; }
@@ -502,7 +510,6 @@
       <div class="p-4 md:p-6">
         <div class="flex items-start justify-between gap-3">
           <div>
-            <!-- Scaled up title and subtitle font sizes, tightened spacing margin below -->
             <h4 id="zoomTitle" class="font-bold text-2xl md:text-3xl leading-tight mb-1">Preview</h4>
             <p id="zoomSub" class="text-lg text-slate-600">Click outside or press Esc to close</p>
           </div>
@@ -515,7 +522,6 @@
           </div>
         </div>
 
-        <!-- Reduced mt-1 to mt-2 to pull content tighter, or effectively zero-margin to sit closer -->
         <div class="mt-2">
           <div id="zoomContent" class="rounded-md bg-slate-50 flex items-center justify-center p-4" style="min-height:60vh;">
             <!-- dynamic content -->
@@ -1235,8 +1241,12 @@
       var right = document.createElement('div');
       right.className = 'detail-text detail-scroll';
       
+      // Determine if this is strictly an experience block to apply the CSS override class (Lines 915-919)
+      var isExp = (detailKey !== 'education-full' && detailKey !== 'research');
+      var listClass = isExp ? 'exp-list-item' : '';
+
       var inner = '<ul style="margin-top:0; padding-left:18px;">';
-      info.items.forEach(function(item){ inner += '<li style="margin-bottom:10px;">' + item + '</li>'; });
+      info.items.forEach(function(item){ inner += '<li class="' + listClass + '" style="margin-bottom:10px;">' + item + '</li>'; });
       inner += '</ul>';
       
       right.innerHTML = inner;
